@@ -409,10 +409,10 @@ namespace CilentRegSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
-            public ClientRow AddClientRow(int Id, string Name, string Address, string Phone_Number, string Email, string Product_Category) {
+            public ClientRow AddClientRow(string Name, string Address, string Phone_Number, string Email, string Product_Category) {
                 ClientRow rowClientRow = ((ClientRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        Id,
+                        null,
                         Name,
                         Address,
                         Phone_Number,
@@ -472,7 +472,11 @@ namespace CilentRegSystem {
                 base.Columns.Add(this.columnProduct_Category);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnId}, true));
+                this.columnId.AutoIncrement = true;
+                this.columnId.AutoIncrementSeed = -1;
+                this.columnId.AutoIncrementStep = -1;
                 this.columnId.AllowDBNull = false;
+                this.columnId.ReadOnly = true;
                 this.columnId.Unique = true;
                 this.columnName.AllowDBNull = false;
                 this.columnName.MaxLength = 50;
@@ -480,7 +484,9 @@ namespace CilentRegSystem {
                 this.columnAddress.MaxLength = 50;
                 this.columnPhone_Number.AllowDBNull = false;
                 this.columnPhone_Number.MaxLength = 50;
+                this.columnEmail.AllowDBNull = false;
                 this.columnEmail.MaxLength = 50;
+                this.columnProduct_Category.AllowDBNull = false;
                 this.columnProduct_Category.MaxLength = 10;
             }
             
@@ -670,12 +676,7 @@ namespace CilentRegSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
             public string Email {
                 get {
-                    try {
-                        return ((string)(this[this.tableClient.EmailColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Email\' in table \'Client\' is DBNull.", e);
-                    }
+                    return ((string)(this[this.tableClient.EmailColumn]));
                 }
                 set {
                     this[this.tableClient.EmailColumn] = value;
@@ -686,40 +687,11 @@ namespace CilentRegSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
             public string Product_Category {
                 get {
-                    try {
-                        return ((string)(this[this.tableClient.Product_CategoryColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Product Category\' in table \'Client\' is DBNull.", e);
-                    }
+                    return ((string)(this[this.tableClient.Product_CategoryColumn]));
                 }
                 set {
                     this[this.tableClient.Product_CategoryColumn] = value;
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
-            public bool IsEmailNull() {
-                return this.IsNull(this.tableClient.EmailColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
-            public void SetEmailNull() {
-                this[this.tableClient.EmailColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
-            public bool IsProduct_CategoryNull() {
-                return this.IsNull(this.tableClient.Product_CategoryColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
-            public void SetProduct_CategoryNull() {
-                this[this.tableClient.Product_CategoryColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -891,22 +863,24 @@ namespace CilentRegSystem.ClientsDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Client] WHERE (([Id] = @Original_Id) AND ([Name] = @Original_Name) AND ([Address] = @Original_Address) AND ([Phone Number] = @Original_Phone_Number) AND ((@IsNull_Email = 1 AND [Email] IS NULL) OR ([Email] = @Original_Email)) AND ((@IsNull_Product_Category = 1 AND [Product Category] IS NULL) OR ([Product Category] = @Original_Product_Category)))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Client] WHERE (([Id] = @Original_Id) AND ([Name] = @Original_N" +
+                "ame) AND ([Address] = @Original_Address) AND ([Phone Number] = @Original_Phone_N" +
+                "umber) AND ([Email] = @Original_Email) AND ([Product Category] = @Original_Produ" +
+                "ct_Category))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Name", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Address", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Address", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Phone_Number", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Phone Number", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Email", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Email", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Email", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Email", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Product_Category", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Product Category", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Product_Category", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Product Category", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Client] ([Id], [Name], [Address], [Phone Number], [Email], [Product Category]) VALUES (@Id, @Name, @Address, @Phone_Number, @Email, @Product_Category);
-SELECT Id, Name, Address, [Phone Number], Email, [Product Category] FROM Client WHERE (Id = @Id)";
+            this._adapter.InsertCommand.CommandText = @"
+                      INSERT INTO [dbo].[Client] ([Name], [Address], [Phone Number], [Email], [Product Category]) VALUES (@Name, @Address, @Phone_Number, @Email, @Product_Category);
+                      SELECT Id, Name, Address, [Phone Number], Email, [Product Category] FROM Client WHERE (Id = SCOPE_IDENTITY())
+                    ";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Address", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Address", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Phone_Number", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Phone Number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -914,10 +888,11 @@ SELECT Id, Name, Address, [Phone Number], Email, [Product Category] FROM Client 
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Product_Category", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Product Category", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Client] SET [Id] = @Id, [Name] = @Name, [Address] = @Address, [Phone Number] = @Phone_Number, [Email] = @Email, [Product Category] = @Product_Category WHERE (([Id] = @Original_Id) AND ([Name] = @Original_Name) AND ([Address] = @Original_Address) AND ([Phone Number] = @Original_Phone_Number) AND ((@IsNull_Email = 1 AND [Email] IS NULL) OR ([Email] = @Original_Email)) AND ((@IsNull_Product_Category = 1 AND [Product Category] IS NULL) OR ([Product Category] = @Original_Product_Category)));
-SELECT Id, Name, Address, [Phone Number], Email, [Product Category] FROM Client WHERE (Id = @Id)";
+            this._adapter.UpdateCommand.CommandText = @"
+                      UPDATE [dbo].[Client] SET [Name] = @Name, [Address] = @Address, [Phone Number] = @Phone_Number, [Email] = @Email, [Product Category] = @Product_Category WHERE (([Id] = @Original_Id) AND ([Name] = @Original_Name) AND ([Address] = @Original_Address) AND ([Phone Number] = @Original_Phone_Number) AND ([Email] = @Original_Email) AND ([Product Category] = @Original_Product_Category));
+                      SELECT Id, Name, Address, [Phone Number], Email, [Product Category] FROM Client WHERE (Id = @Id)
+                    ";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Address", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Address", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Phone_Number", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Phone Number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -927,10 +902,9 @@ SELECT Id, Name, Address, [Phone Number], Email, [Product Category] FROM Client 
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Name", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Address", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Address", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Phone_Number", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Phone Number", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Email", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Email", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Email", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Email", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Product_Category", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Product Category", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Product_Category", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Product Category", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1029,20 +1003,16 @@ SELECT Id, Name, Address, [Phone Number], Email, [Product Category] FROM Client 
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_Phone_Number));
             }
             if ((Original_Email == null)) {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("Original_Email");
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((string)(Original_Email));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_Email));
             }
             if ((Original_Product_Category == null)) {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("Original_Product_Category");
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((string)(Original_Product_Category));
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((string)(Original_Product_Category));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -1064,37 +1034,36 @@ SELECT Id, Name, Address, [Phone Number], Email, [Product Category] FROM Client 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int Id, string Name, string Address, string Phone_Number, string Email, string Product_Category) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(Id));
+        public virtual int Insert(string Name, string Address, string Phone_Number, string Email, string Product_Category) {
             if ((Name == null)) {
                 throw new global::System.ArgumentNullException("Name");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(Name));
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(Name));
             }
             if ((Address == null)) {
                 throw new global::System.ArgumentNullException("Address");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Address));
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(Address));
             }
             if ((Phone_Number == null)) {
                 throw new global::System.ArgumentNullException("Phone_Number");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(Phone_Number));
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Phone_Number));
             }
             if ((Email == null)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("Email");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(Email));
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(Email));
             }
             if ((Product_Category == null)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("Product_Category");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(Product_Category));
+                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(Product_Category));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -1116,73 +1085,69 @@ SELECT Id, Name, Address, [Phone Number], Email, [Product Category] FROM Client 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int Id, string Name, string Address, string Phone_Number, string Email, string Product_Category, int Original_Id, string Original_Name, string Original_Address, string Original_Phone_Number, string Original_Email, string Original_Product_Category) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Id));
+        public virtual int Update(string Name, string Address, string Phone_Number, string Email, string Product_Category, int Original_Id, string Original_Name, string Original_Address, string Original_Phone_Number, string Original_Email, string Original_Product_Category, int Id) {
             if ((Name == null)) {
                 throw new global::System.ArgumentNullException("Name");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(Name));
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(Name));
             }
             if ((Address == null)) {
                 throw new global::System.ArgumentNullException("Address");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Address));
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(Address));
             }
             if ((Phone_Number == null)) {
                 throw new global::System.ArgumentNullException("Phone_Number");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(Phone_Number));
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Phone_Number));
             }
             if ((Email == null)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("Email");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Email));
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(Email));
             }
             if ((Product_Category == null)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("Product_Category");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Product_Category));
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Product_Category));
             }
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_Id));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_Id));
             if ((Original_Name == null)) {
                 throw new global::System.ArgumentNullException("Original_Name");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_Name));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_Name));
             }
             if ((Original_Address == null)) {
                 throw new global::System.ArgumentNullException("Original_Address");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_Address));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_Address));
             }
             if ((Original_Phone_Number == null)) {
                 throw new global::System.ArgumentNullException("Original_Phone_Number");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_Phone_Number));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_Phone_Number));
             }
             if ((Original_Email == null)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("Original_Email");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_Email));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_Email));
             }
             if ((Original_Product_Category == null)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("Original_Product_Category");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_Product_Category));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_Product_Category));
             }
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -1204,7 +1169,7 @@ SELECT Id, Name, Address, [Phone Number], Email, [Product Category] FROM Client 
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(string Name, string Address, string Phone_Number, string Email, string Product_Category, int Original_Id, string Original_Name, string Original_Address, string Original_Phone_Number, string Original_Email, string Original_Product_Category) {
-            return this.Update(Original_Id, Name, Address, Phone_Number, Email, Product_Category, Original_Id, Original_Name, Original_Address, Original_Phone_Number, Original_Email, Original_Product_Category);
+            return this.Update(Name, Address, Phone_Number, Email, Product_Category, Original_Id, Original_Name, Original_Address, Original_Phone_Number, Original_Email, Original_Product_Category, Original_Id);
         }
     }
     
